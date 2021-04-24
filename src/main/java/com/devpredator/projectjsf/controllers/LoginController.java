@@ -7,8 +7,11 @@ import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import com.devpredator.projectjsf.dto.UsuarioDto;
 
 /**
  * @author DevPredator
@@ -16,6 +19,18 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 public class LoginController {
+	
+	@ManagedProperty("#{sessionController}")
+	private SessionController sessionController;
+	
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
+	}
+
 	/**
 	 * Usuario que ingresan en el login.
 	 */
@@ -33,6 +48,10 @@ public class LoginController {
 		if (usuario.equals("devpredator") && password.equals("12345")) {
 
 			try {
+				UsuarioDto usuarioDto = new UsuarioDto();
+				usuarioDto.setUsuario(this.usuario);
+				usuarioDto.setPassword(this.password);
+				this.sessionController.setUsuarioDto(usuarioDto);
 				this.redireccionar("principal.xhtml");
 			} catch (IOException e) {
 				FacesContext.getCurrentInstance().addMessage("formLogin:txtUsuario", new FacesMessage(FacesMessage.SEVERITY_FATAL, "La página no existe", ""));

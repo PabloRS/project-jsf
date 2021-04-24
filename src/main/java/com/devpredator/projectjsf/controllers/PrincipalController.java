@@ -23,6 +23,16 @@ public class PrincipalController {
 	
 	private List<Empleado> empleados;
 	
+	private List<Empleado> empleadosFiltrados;
+	
+	public List<Empleado> getEmpleadosFiltrados() {
+		return empleadosFiltrados;
+	}
+
+	public void setEmpleadosFiltrados(List<Empleado> empleadosFiltrados) {
+		this.empleadosFiltrados = empleadosFiltrados;
+	}
+
 	public List<Empleado> getEmpleados() {
 		return empleados;
 	}
